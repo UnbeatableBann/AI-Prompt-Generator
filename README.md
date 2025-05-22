@@ -113,7 +113,7 @@ streamlit run app.py
 ## .env.example (Frontend)
 
 ```
-BACKEND_URL=http://localhost:5000
+BACKEND_URL=http://localhost:5000 or render URL
 ```
 
 ---
