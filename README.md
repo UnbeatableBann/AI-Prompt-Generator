@@ -1,146 +1,138 @@
 # 🤖 AI Prompt Generator
 
-A full-stack AI-powered prototype that:
+A full-stack AI-powered prompt engineering web application that:
 
-* Accepts user input
-* Generates AI-based responses using prompt engineering
+* Accepts user queries
+* Uses AI to generate responses in formal and casual tones
 * Stores all interactions in a PostgreSQL database
-* Displays results and history via a modern Streamlit UI
+* Displays history and results via a Streamlit frontend
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
-[Hosted Link](https://your-deployment-url.com)
+Frontend: [Streamlit App](https://unbeatablebann-ai-prompt-generator-app-vachgp.streamlit.app/)
 
----
-
-## 💪 Tech Stack
-
-| Layer    | Technology              |
-| -------- | ----------------------- |
-| Frontend | Streamlit               |
-| Backend  | Flask + REST API        |
-| Database | PostgreSQL + SQLAlchemy |
-| AI Model | Gemini / GPT API        |
-| Testing  | Pytest                  |
+Backend: [GitHub Repo](https://github.com/UnbeatableBann/AI-Prompt-Generator-Backend)
 
 ---
 
-## 🧠 Prompt Engineering Strategy
+## Tech Stack
 
-Each query is reformulated to suit the selected tone:
+* **Frontend:** Streamlit
+* **Backend:** Flask (Python)
+* **Database:** PostgreSQL
+* **AI Model:** Gemini / OpenAI (pluggable)
+* **Deployment:**
 
-* **Casual**: Friendly, conversational tone
-* **Formal**: Professional and structured tone
-* **Both (Default)**: Generates both tones
+  * Frontend: Streamlit Cloud
+  * Backend: Render or Railway
 
-Example of internal prompt sent to the AI engine:
+---
 
-```
-Please answer the following question in a [tone] tone: "[user_query]"
+## Features
+
+* Mock Authentication (user ID stored in session)
+* Tone/Style selection (Casual, Formal, or Both)
+* AI-based prompt generation via REST API
+* Query + Response storage with timestamps
+* Full history view per user
+* Environment-based configuration
+
+---
+
+## 🧪 Testing but in Backend
+
+* Unit Tests:
+
+  * Prompt formatting logic
+  * AI generation logic (mocked)
+  * API route validation
+* Integration Test:
+
+  * Simulates full interaction: query → AI response → DB store → history fetch
+
+Run tests:
+
+```bash
+pytest test/
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+## Repo Structure (Frontend)
 
-### 1. Clone the Repository
+```
+frontend/
+├── app.py                # Streamlit UI
+├── .env.example          # Environment config
+├── requirements.txt      # Dependencies
+└── README.md
+```
+
+---
+
+## 📦 Setup & Run
+
+### Backend (separate repo)
 
 ```bash
-git clone https://github.com/UnbeatableBann/ai-prompt-generator.git
-cd ai-prompt-generator
-```
-
-### 2. Set Up Virtual Environment
-
-```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### 3. Configure Environment Variables
-
-```bash
-cp .env.example .env
-```
-
-Then fill in:
-
-```
-BACKEND_URL=http://localhost:5000 or render URL
-DATABASE_URL=postgresql://username:password@localhost:5432/yourdb
-GEMINI_API_KEY=your_gemini_api_key
-```
-
-### 4. Run the Backend Server
-
-```bash
+git clone https://github.com/your-backend-repo
 cd backend
-flask run
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+pip install -r requirements.txt
+cp .env.example .env      # Update DB_URL and API_KEY
+python app.py
 ```
 
-### 5. Run the Streamlit Frontend
+### Frontend
 
 ```bash
+git clone https://github.com/your-frontend-repo
 cd frontend
+pip install -r requirements.txt
+cp .env.example .env      # Set BACKEND_URL
 streamlit run app.py
 ```
 
-### 6. Run Tests
+---
 
-```bash
-pytest
+## Prompt Strategy
+
+* The AI receives structured prompts like:
+
+  ```
+  Generate a response to the following user query in a casual and formal tone:
+  Query: {user_input}
+  ```
+* Separate prompts help improve tone fidelity and generation quality.
+
+---
+
+## .env.example (Frontend)
+
+```
+BACKEND_URL=http://localhost:5000
 ```
 
 ---
 
-## 🔧 Folder Structure
+## .env.example (Backend)
 
 ```
-ai-prompt-generator/
-├── backend/
-│   ├── app.py
-│   ├── models.py
-│   └── ai_service.py
-├── frontend/
-│   └── app.py
-├── tests/
-│   ├── test_prompt.py
-│   ├── test_api.py
-│   └── test_full.py
-├── requirements.txt
-├── .env.example
-├── README.md
-└── .gitignore
+DATABASE_URL=postgresql://user:password@host:port/dbname
+API_KEY=your-genai-api-key
 ```
 
 ---
 
-## 🔮 Features
+## Contributing
 
-* ✍️ Text input form with tone selection
-* 🎨 AI-generated responses (Casual, Formal, Both)
-* 📅 Historical view of past prompts and answers
-* 🌐 API integration with Gemini or GPT
-* 📊 Unit + Integration Tests using Pytest
+Me and Myself. You also contribute but be meaningful.
 
 ---
 
-## 🚀 Deployment
-
-* **Backend**: Deploy Flask API on Render.
-* **Frontend**: Use Streamlit Community Cloud or host with Streamlit Sharing
-
----
-
-## 📚 License
+## License
 
 MIT License
-
----
-
-## 👥 Contributors
-
-Built with ❤️ by \Shadab Jamadar
